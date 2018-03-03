@@ -1,0 +1,43 @@
+<div class="gpb-water-component">
+  <form [formGroup]="form" novalidate>
+    <div class="form-group">
+      <label class="center-block">Evaporation:
+        <input class="form-control" formControlName="evaporation">
+      </label>
+      <label class="center-block">Absorption:
+        <input class="form-control" formControlName="absorption">
+      </label>
+      <label class="center-block">Shrinkage:
+        <input class="form-control" formControlName="shrinkage">
+      </label>
+    </div>
+  </form>
+
+  <div>
+    Form Value: {{form.value | json}}
+  </div>
+  <div>
+    Form Status: {{form.status | json}}
+  </div>
+  <div>
+    Water: {{water | async | json}}
+  </div>
+  <div>
+    Fermentables: {{fermentables | async | json}}
+  </div>
+  <div>
+    Boil: {{boil | async | json}}
+  </div>
+  <div>
+    Brewhouse: {{brewhouse | async | json}}
+  </div>
+  <div>
+    Absorption: {{absorption}}
+  </div>
+  <div>
+    Boiloff: {{boiloff}}
+  </div>
+  <div>
+    Total: {{total}}
+  </div>
+</div>

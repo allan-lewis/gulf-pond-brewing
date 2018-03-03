@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+.gpb-fermentables-component {
+    background: lightgoldenrodyellow;
+}
+
+.gpb-water-component {
+    background: lightskyblue;
+}
+
+.gpb-brewhouse-component {
+    background: lightgray;
+}
+
+.gpb-boil-component {
+    background: lightpink;
+}

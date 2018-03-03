@@ -1,0 +1,22 @@
+<div class="gpb-fermentables-component">
+  <form [formGroup]="form" novalidate>
+    <div class="form-group">
+      <label class="center-block">Pounds:
+        <input class="form-control" formControlName="pounds">
+      </label>
+      <label class="center-block">Potential:
+        <input class="form-control" formControlName="potential">
+      </label>
+    </div>
+  </form>
+
+  <div>
+    {{form.value | json}}
+  </div>
+  <div>
+    {{form.status | json}}
+  </div>
+  <div>
+    {{fermentables | async | json}}
+  </div>
+</div>
