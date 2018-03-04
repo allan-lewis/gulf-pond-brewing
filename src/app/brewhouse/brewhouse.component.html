@@ -1,22 +1,22 @@
 <div class="gpb-brewhouse-component">
-  <form [formGroup]="form" novalidate>
-    <div class="form-group">
-      <label class="center-block">Batch Size:
-        <input class="form-control" formControlName="batchSize">
-      </label>
-      <label class="center-block">Efficiency:
-        <input class="form-control" formControlName="efficiency">
-      </label>
-    </div>
-  </form>
+  <section class="mat-typography">
 
-  <div>
-    {{form.value | json}}
-  </div>
-  <div>
-    {{form.status | json}}
-  </div>
-  <div>
-    {{model | async | json}}
-  </div>
-</div>
+    <h1>Brewhouse</h1>
+
+    <form [formGroup]="form" novalidate>
+      <div class="form-group">
+        <mat-form-field>
+          <mat-select placeholder="Brew Type" formControlName="brewType">
+            <mat-option *ngFor="let item of types | keys" [value]="item.key">{{item.value}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Batch Size" formControlName="batchSize">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Efficiency" formControlName="efficiency">
+        </mat-form-field>
+      </div>
+    </form>
+
+  </section>

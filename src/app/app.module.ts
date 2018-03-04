@@ -10,7 +10,7 @@ import { BrewhouseComponent } from './brewhouse/brewhouse.component';
 import { HeaderComponent } from './header/header.component';
 import { FermentablesComponent } from './fermentables/fermentables.component';
 
-import { MatToolbarModule, MatInputModule } from '@angular/material';
+import { MatToolbarModule, MatInputModule, MatSelectModule } from '@angular/material';
 import { WaterComponent } from './water/water.component';
 import { MashComponent } from './mash/mash.component';
 
@@ -21,6 +21,8 @@ import { waterModelReducer } from './water/water-model.reducer';
 import { boilModelReducer } from './boil/boil-model.reducer';
 import { BoilComponent } from './boil/boil.component';
 
+import { KeysPipe } from './brewhouse/brewhouse.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +31,8 @@ import { BoilComponent } from './boil/boil.component';
     FermentablesComponent,
     WaterComponent,
     MashComponent,
-    BoilComponent
+    BoilComponent,
+    KeysPipe
   ],
   imports: [
     BrowserModule,
@@ -37,6 +40,7 @@ import { BoilComponent } from './boil/boil.component';
     ReactiveFormsModule,
     HttpModule,
     MatInputModule,
+    MatSelectModule,
     MatToolbarModule,
     StoreModule.forRoot({ 
       brewhouse: brewhouseModelReducer,

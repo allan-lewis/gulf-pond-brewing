@@ -1,5 +1,5 @@
 export enum BrewType {
-    AllGrain,
+    BIAB,
     Extract
 }
 
