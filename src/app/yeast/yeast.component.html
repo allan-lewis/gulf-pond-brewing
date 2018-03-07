@@ -1,0 +1,14 @@
+<div class="gpb-yeast-component">
+  <section class="mat-typography">
+    <form [formGroup]="form" novalidate>
+      <div class="form-group">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Attenuation" formControlName="attenuation">
+        </mat-form-field>
+      </div>
+    </form>
+    <div>
+      {{model | async | json}}
+    </div>
+  </section>
+</div>

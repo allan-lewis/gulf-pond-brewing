@@ -21,3 +21,11 @@ body {
 .gpb-boil-component {
     background: lightpink;
 }
+
+.gpb-targets-component {
+    background:  lightsalmon;
+}
+
+.gpb-yeast-component {
+    background: lightseagreen
+}

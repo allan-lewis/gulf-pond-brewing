@@ -10,10 +10,12 @@ export class BrewhouseAction implements Action {
   constructor(public payload: BrewhouseModel) { }
 }
 
-export function brewhouseModelReducer(state: BrewhouseModel = {brewType: BrewType.BIAB, batchSize: 1.25, efficiency: 75.00}, action: BrewhouseAction) {
+export function brewhouseModelReducer(state: BrewhouseModel = {brewType: BrewType.Extract, batchSize: 1.25, efficiency: 70.00}, action: BrewhouseAction) {
   switch (action.type) {
     case BREWHOUSE:
-      return Object.assign({}, action.payload);
+      const original = JSON.stringify(state);
+      const updated = JSON.stringify(action.payload);
+      return original === updated ? state : Object.assign({}, action.payload);
     default:
       return state;
   }

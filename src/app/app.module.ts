@@ -22,6 +22,9 @@ import { boilModelReducer } from './boil/boil-model.reducer';
 import { BoilComponent } from './boil/boil.component';
 
 import { KeysPipe } from './brewhouse/brewhouse.component';
+import { TargetsComponent } from './targets/targets.component';
+import { YeastComponent } from './yeast/yeast.component';
+import { yeastModelReducer } from './yeast/yeast-model.reducer';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,9 @@ import { KeysPipe } from './brewhouse/brewhouse.component';
     WaterComponent,
     MashComponent,
     BoilComponent,
-    KeysPipe
+    KeysPipe,
+    TargetsComponent,
+    YeastComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +51,8 @@ import { KeysPipe } from './brewhouse/brewhouse.component';
       brewhouse: brewhouseModelReducer,
       fermentables: fermentablesModelReducer,
       water: waterModelReducer,
-      boil: boilModelReducer
+      boil: boilModelReducer,
+      yeast: yeastModelReducer
     })
   ],
   providers: [],

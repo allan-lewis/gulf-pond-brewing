@@ -10,7 +10,7 @@ export class FermentablesAction implements Action {
   constructor(public payload: FermentablesModel) { }
 }
 
-export function fermentablesModelReducer(state: FermentablesModel = {pounds: 0, potential: 0}, action: FermentablesAction) {
+export function fermentablesModelReducer(state: FermentablesModel = {pounds: 2, potential: 1.045}, action: FermentablesAction) {
   switch (action.type) {
     case FERMENTABLES:
       return Object.assign({}, action.payload);

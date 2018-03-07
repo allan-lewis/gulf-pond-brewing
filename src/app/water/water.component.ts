@@ -7,7 +7,7 @@ import { Store, select } from '@ngrx/store';
 
 import { AppState } from '../app.state';
 
-import { BrewhouseModel } from '../brewhouse/brewhouse-model';
+import { BrewhouseModel, BrewType } from '../brewhouse/brewhouse-model';
 import { FermentablesModel } from '../fermentables/fermentables-model';
 import { WaterModel } from './water-model';
 import { BoilModel } from '../boil/boil-model';
@@ -27,10 +27,6 @@ export class WaterComponent implements OnInit {
 
   form: FormGroup;
 
-  total: number;
-  absorption: number;
-  boiloff: number;
-
   constructor(private store: Store<AppState>, private fb: FormBuilder) {
     this.brewhouse = store.select(state => state.brewhouse);
     this.fermentables = store.select(state => state.fermentables);
@@ -46,21 +42,11 @@ export class WaterComponent implements OnInit {
         shrinkage: x.shrinkage
       });
     });
-
-    this.water.combineLatest(this.fermentables, this.brewhouse, this.boil).subscribe(x => {
-      this.calculate(x[0], x[1], x[2], x[3]);
-    });
   }
 
   ngOnInit() {
 
   }
-
-  calculate(water: WaterModel, fermentables: FermentablesModel, brewhouse: BrewhouseModel, boil: BoilModel) {
-    this.boiloff = boil.duration * water.evaporation;
-    this.absorption = water.absorption * fermentables.pounds; 
-    this.total = brewhouse.batchSize + this.boiloff + this.absorption + water.shrinkage;
-  }  
   
   buildForm(): void {
     this.form = this.fb.group({
@@ -69,12 +55,16 @@ export class WaterComponent implements OnInit {
       shrinkage: [0, Validators.required]
     });
 
-    this.form.valueChanges.subscribe(x => {
+    this.form.valueChanges.combineLatest(this.boil, this.fermentables, this.brewhouse).subscribe(x => {
       if (this.form.status === "VALID") {
         let water = new WaterModel();
         water.evaporation = +this.form.value.evaporation;
         water.absorption = +this.form.value.absorption;
         water.shrinkage = +this.form.value.shrinkage;
+
+        water.lossToBoiloff = x[1].duration * water.evaporation;
+        water.lossToAbsorption = x[3].brewType === BrewType.Extract ? 0 : x[2].pounds * water.absorption;
+        water.total = x[3].batchSize + water.lossToBoiloff + water.lossToAbsorption + water.shrinkage;
 
         this.store.dispatch(new WaterAction(water));
       }

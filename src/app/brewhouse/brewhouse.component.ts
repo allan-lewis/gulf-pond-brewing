@@ -40,12 +40,18 @@ export class BrewhouseComponent implements OnInit {
     
     this.buildForm();
 
-    this.model.take(1).subscribe(x => {
+    this.model.subscribe(x => {
       this.form.setValue({
         brewType: x.brewType,
         batchSize: x.batchSize,
         efficiency: x.efficiency
       });
+
+      if (this.form.get('brewType').value === BrewType.Extract) {
+        this.form.get('efficiency').disable();
+      } else {
+        this.form.get('efficiency').enable();
+      }
     });
   }
 
@@ -64,7 +70,7 @@ export class BrewhouseComponent implements OnInit {
         let brewhouse = new BrewhouseModel();
         brewhouse.brewType = this.form.value.brewType;
         brewhouse.batchSize = +this.form.value.batchSize;
-        brewhouse.efficiency = +this.form.value.efficiency;
+        brewhouse.efficiency = !!this.form.value.efficiency ? +this.form.value.efficiency : 100;
 
         this.store.dispatch(new BrewhouseAction(brewhouse));
       }
